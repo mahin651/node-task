@@ -7,7 +7,7 @@ const express = require('express');
 const req = require('express/lib/request');
 const cources=require('./routes/cources')
 const home=require('./routes/home');
-const logger =require('./middleware/logger')
+const logger =require('./middleware/logger');
 const app =express();
 
 app.set('view engine','pug');
@@ -18,6 +18,8 @@ app.use(express.static('public'));
 app.use(helmet());
 app.use('/api/cources',cources)
 app.use('/',home)
+
+
 
 //configruation
 console.log('Application name : '+config.get('name'));
