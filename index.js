@@ -9,7 +9,6 @@ const cources=require('./routes/cources')
 const home=require('./routes/home');
 const logger =require('./middleware/logger');
 const app =express();
-
 app.set('view engine','pug');
 app.set('views','./views');
 app.use(express.json());
@@ -19,7 +18,11 @@ app.use(helmet());
 app.use('/api/cources',cources)
 app.use('/',home)
 
+const mongoose=require('mongoose');
 
+mongoose.connect('mongodb+srv://cluster0.ivduc.mongodb.net/nodeapp')
+.then(()=> console.log('Connected to db'))
+.catch(err => console.error('Could not connect to db',err));
 
 //configruation
 console.log('Application name : '+config.get('name'));
