@@ -8,16 +8,16 @@ mongoose.connect('mongodb+srv://new:new651@cluster0.ivduc.mongodb.net/nodeapp?re
 
 const courceSchema=new mongoose.Schema({
     name:{type:String,
-        required:true,
+        required:'Please enter the name',
         minlength:5,
         maxlength:255
     },
     category:{
         type:String,
         lowercase:true,
-        required:true,
-        trim:true,  
-        enum:['web','mobile','network']
+        required:'category is required',
+         trim:true,  
+         enum:['web','mobile','network']
     },
     author:String,
     
@@ -51,11 +51,11 @@ const Cource= mongoose.model('Cource',courceSchema);
 async function createCource(){
 const  cource = new Cource({
  name:'Angular cource',
- category:'web',
+ category:'network',
 author:'mosh',
 tags:['angular','frontend'],
 isPublished:true,
-price:15
+price:17
 });
 
 try{
