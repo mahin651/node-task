@@ -52,8 +52,6 @@ async function getUser(){
 const pageNumber =2;
 const pageSize =10;
 const users = await User.find({author:'mosh'})
-// .find({price:{$gte :10},$lte:20})
-// .find({ price: {$in:[10,20,30]}})
 .sort({name:1})
 .skip((pageNumber -1) * pageSize)
 .limit(pageSize)
@@ -69,10 +67,6 @@ async function updateUser(id){
     user.author='Another author';
     const result=await user.save()
     console.log(result)
-    // cource.set({
-    //     isPublished:true,
-    //     author:'Another author'
-    // })
 }
 updateUser('6232e3b66570965012486d66');
 
