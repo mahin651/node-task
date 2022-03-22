@@ -64,11 +64,11 @@ async function updateUser(id){
     const user=await User.findById(id);
     if(!user) return;
     user.isPublished=true;
-    user.author='Another author';
+    user.username='Another author';
     const result=await user.save()
     console.log(result)
 }
-updateUser('6232e3b66570965012486d66');
+updateUser('62397510035e27e7e348350c');
 
 
 
