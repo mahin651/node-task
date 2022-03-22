@@ -44,7 +44,7 @@ const courceSchema=new mongoose.Schema({
         get: v => Math.round(v),
         set: v => Math.round(v)
     
-    }
+    },
 });
 
 const Cource= mongoose.model('Cource',courceSchema);

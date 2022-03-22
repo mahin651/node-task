@@ -18,8 +18,11 @@ const userSchema=new mongoose.Schema({
     },
     
     username:{
-        type:Array,
-        }
+        type:String,
+        },
+    
+       mycources: [{body:"string",type: mongoose.Schema.Types.ObjectId, ref: 'cources'}],
+    
     
 });
 
@@ -29,6 +32,7 @@ const  user = new User({
  name:'Moshify',
  email:'mosh651@gmail.com',
 username:'mosh',
+mycources:[]
 
 });
 
