@@ -28,7 +28,10 @@ router.get('/:id', (req, res) => {
      }
     const cource={
           id: cources.length +1,
-          name:req.body.name
+          name:req.body.name,
+          id:user.req.body._id
+
+          
       };
      cources.push(cource);
      res.send(cource);

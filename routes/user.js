@@ -28,7 +28,8 @@ router.get('/:id', (req, res) => {
      }
     const user={
           id: users.length +1,
-          name:req.body.name
+          name:req.body.name,
+          id:req.body._id
       };
       users.push(user);
      res.send(user);
