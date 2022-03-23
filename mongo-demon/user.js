@@ -1,5 +1,6 @@
 
 const number = require('joi/lib/types/number');
+const string = require('joi/lib/types/string');
 const mongoose=require('mongoose');
 
 mongoose.connect('mongodb+srv://new:new651@cluster0.ivduc.mongodb.net/nodeapp?retryWrites=true&w=majority')
@@ -22,7 +23,9 @@ const userSchema=new mongoose.Schema({
         },
     
        mycources: [{body:"string",type: mongoose.Schema.Types.ObjectId, ref: 'cources'}],
-    
+   designation:{
+       type:String
+   }
     
 });
 
@@ -32,8 +35,8 @@ const  user = new User({
  name:'Moshify',
  email:'mosh651@gmail.com',
 username:'mosh',
-mycources:[]
-
+mycources:[],
+designation:'user'
 });
 
 try{
