@@ -74,8 +74,6 @@ async function getCource(){
 const pageNumber =2;
 const pageSize =10;
 const cources = await Cource.find({author:'mosh'})
-// .find({price:{$gte :10},$lte:20})
-// .find({ price: {$in:[10,20,30]}})
 .sort({name:1})
 .skip((pageNumber -1) * pageSize)
 .limit(pageSize)
@@ -91,10 +89,6 @@ async function updateCource(id){
     cource.author='Another author';
     const result=await cource.save()
     console.log(result)
-    // cource.set({
-    //     isPublished:true,
-    //     author:'Another author'
-    // })
 }
 updateCource('6232e3b66570965012486d66');
 

@@ -7,20 +7,16 @@ const cources =[
     {id: 2,name:'cource2'},
     {id: 3,name:'cource3'},
 ]
-
-
-
 router.get('/',(req,res)=>{
     res.send(cources);
 })
-
 router.get('/:id', (req, res) => {
     const cource = cources.find(c=>c.id === parseInt(req.params.id));
     if (!cource) return res.status(404).send('the cource with given id not avalible.');
      else return res.send(cource);
  });
 
- router.post('/', (req, res) => {
+router.post('/', (req, res) => {
      const {error}=ValidateCource(req.body);
      if(error){
          res.status(400),send(result.error.details[0].message);
@@ -36,9 +32,6 @@ router.get('/:id', (req, res) => {
      cources.push(cource);
      res.send(cource);
       });
-
-
-
 router.put('/:id',(req,res)=>{
      const cource=cources.find(c=>c.id === parseInt(req.params.id));
      if(!cource) return res.status(404).send('The cource with given Id was not avalible');
@@ -50,7 +43,6 @@ router.put('/:id',(req,res)=>{
  cource.name=req.body.name;
  res.send(cource);
  });
-
 router.delete('/:id',(req,res)=>{
      const cource=cources.find(c=> c.id === parseInt(req.params.id));
      if(!cource){
@@ -62,12 +54,10 @@ router.delete('/:id',(req,res)=>{
 
      res.send(cources);
 });
- 
 function ValidateCource(cource){
     const schema=
          Joi.object({name:Joi.string().min(3).required()});
     
      return  schema.validate(cource);
 }
-
 module.exports=router;

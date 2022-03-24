@@ -2,25 +2,21 @@ const express=require('express');
 const router=express.Router();
 const Joi=require('joi');
 
-const cources =[
+const users =[
     {id: 1,name:'atul'},
     {id: 2,name:'raj'},
     {id: 3,name:'akhilesh'},
 ]
-
-
-
 router.get('/',(req,res)=>{
     res.send(users);
 })
-
 router.get('/:id', (req, res) => {
     const user = users.find(c=>c.id === parseInt(req.params.id));
     if (!cource) return res.status(404).send('the user with given id not avalible.');
      else return res.send(user);
  });
 
- router.post('/', (req, res) => {
+router.post('/', (req, res) => {
      const {error}=ValidateUser(req.body);
      if(error){
          res.status(400),send(result.error.details[0].message);
@@ -35,9 +31,7 @@ router.get('/:id', (req, res) => {
      res.send(user);
       });
 
-
-
-router.put('/:id',(req,res)=>{
+      router.put('/:id',(req,res)=>{
      const user=users.find(c=>c.id === parseInt(req.params.id));
      if(!cource) return res.status(404).send('The user with given Id was not avalible');
      const {error} =ValidateUser(req.body);

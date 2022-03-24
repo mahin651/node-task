@@ -17,18 +17,15 @@ const userSchema=new mongoose.Schema({
         type:String,
         required:'email is required'
     },
-    
     username:{
         type:String,
         },
+    mycources: [{body:"string",type: mongoose.Schema.Types.ObjectId, ref: 'cources'}],
     
-       mycources: [{body:"string",type: mongoose.Schema.Types.ObjectId, ref: 'cources'}],
-   designation:{
+    designation:{
        type:String
-   }
-    
+    }
 });
-
 const User= mongoose.model('User',userSchema);
 async function createUser(){
 const  user = new User({
@@ -40,17 +37,14 @@ designation:'user'
 });
 
 try{
-    
- const result= await user.save();
+const result= await user.save();
  console.log(result);
 }
 catch(ex){
     for(field in ex.errors)
-    console.log(ex.errors[field].message);
-}
+    console.log(ex.errors[field].message);}
 }
 createUser()
- 
 async function getUser(){
 const pageNumber =2;
 const pageSize =10;
@@ -62,7 +56,6 @@ const users = await User.find({author:'mosh'})
 console.log(users);
 }
 getUser();
-
 async function updateUser(id){
     const user=await User.findById(id);
     if(!user) return;
