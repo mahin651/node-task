@@ -1,7 +1,9 @@
 
 const number = require('joi/lib/types/number');
 const string = require('joi/lib/types/string');
+const jwt =require("jsonwebtoken");
 const mongoose=require('mongoose');
+const config=require("config");
 
 mongoose.connect('mongodb+srv://new:new651@cluster0.ivduc.mongodb.net/nodeapp?retryWrites=true&w=majority')
 .then(()=> console.log('Connected to db'))
@@ -26,6 +28,13 @@ const userSchema=new mongoose.Schema({
        type:String
     }
 });
+userSchema.methods.generateAuthToken = function () {
+  const token = jwt.sign(
+    _.pick(this, [ "name"]),
+    config.get("jwtSecret")
+  );
+  return token;
+  }
 const User= mongoose.model('User',userSchema);
 async function createUser(){
 const  user = new User({
@@ -34,7 +43,8 @@ const  user = new User({
 username:'mosh',
 mycources:[],
 designation:'user'
-});
+}
+);
 
 try{
 const result= await user.save();
@@ -62,7 +72,8 @@ async function updateUser(id){
     user.isPublished=true;
     user.username='Another author';
     const result=await user.save()
-    console.log(result)
+    console.log(result),
+    
 }
 updateUser('62397510035e27e7e348350c');
 

@@ -2,6 +2,7 @@ const express=require('express');
 const router=express.Router();
 const Joi=require('joi');
 
+
 const users =[
     {id: 1,name:'atul'},
     {id: 2,name:'raj'},
@@ -29,6 +30,12 @@ router.post('/', (req, res) => {
       };
       users.push(user);
      res.send(user);
+    
+     const token = user.generateAuthToken();
+  
+    res.header("Authorization", "Bearer " + token)
+    //.send(_.pick(user, ["_id", "name", "email"]));
+    .send({ token });
       });
 
       router.put('/:id',(req,res)=>{
@@ -41,6 +48,7 @@ router.post('/', (req, res) => {
      }
      user.name=req.body.name;
  res.send(user);
+ 
  });
 
 router.delete('/:id',(req,res)=>{
@@ -54,10 +62,14 @@ router.delete('/:id',(req,res)=>{
 
      res.send(users);
 });
- 
+const token = users.generateAuthToken();
+
+res.send({ token });
 function ValidateUser(user){
     const schema=
          Joi.object({name:Joi.string().min(3).required()});
+         Joi.object({email:Joi.string().min(3).required()});
+         
     
      return  schema.validate(user);
 }

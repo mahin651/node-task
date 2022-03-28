@@ -9,6 +9,7 @@ const cources=require('./routes/cources')
 const home=require('./routes/home');
 const logger =require('./middleware/logger');
 const app =express();
+const auth =require('./routes/auth')
 app.set('view engine','pug');
 app.set('views','./views');
 app.use(express.json());
@@ -17,7 +18,7 @@ app.use(express.static('public'));
 app.use(helmet());
 app.use('/api/cources',cources)
 app.use('/',home)
-
+app.use('api/auth',auth)
 const mongoose=require('mongoose');
 
 mongoose.connect('mongodb+srv://cluster0.ivduc.mongodb.net/nodeapp')
@@ -40,5 +41,5 @@ app.use(function log(req,res,next){
     });
 
 //port
- const port = process.env.PORT || 8000;
+ const port = process.env.PORT || 9000;
  app.listen(port,()=> console.log(`Listening on port ${port}...`));
