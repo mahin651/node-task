@@ -19,8 +19,7 @@ router.get('/:id', (req, res) => {
  });
 
 router.post('/', (req, res) => {
-    const users={id:3};
-    const token = jwt.sign({user},'my secret key');
+    const token = jwt.sign({users},'my secret key');
     res.json({
         token:token
     })
@@ -63,9 +62,7 @@ router.delete('/:id',(req,res)=>{
 
      res.send(users);
 });
-const token = users.generateAuthToken();
 
-res.send({ token });
 function ValidateUser(user){
     const schema=
          Joi.object({name:Joi.string().min(3).required()});

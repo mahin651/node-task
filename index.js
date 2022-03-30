@@ -6,6 +6,7 @@ const morgan=require('morgan');
 const express = require('express');
 const req = require('express/lib/request');
 const cources=require('./routes/cources')
+const user =require('./routes/user')
 const home=require('./routes/home');
 // const logger =require('./middleware/logger');
 const app =express();
@@ -17,9 +18,11 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.static('public'));
 app.use(helmet());
 app.use('/api/cources',cources)
+ app.use('/api/user',user)
 app.use('/',home)
 // app.use('api/auth',auth)
 const mongoose=require('mongoose');
+const { request } = require('http');
 
 mongoose.connect('mongodb+srv://cluster0.ivduc.mongodb.net/nodeapp')
 .then(()=> console.log('Connected to db'))
@@ -41,5 +44,5 @@ app.use(function log(req,res,next){
     });
 
 //port
- const port = process.env.PORT || 8000;
+ const port = process.env.PORT || 9000;
  app.listen(port,()=> console.log(`Listening on port ${port}...`));
