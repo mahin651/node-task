@@ -1,6 +1,7 @@
 const express=require('express');
 const router=express.Router();
 const Joi=require('joi');
+var jwt=require("jsonwebtoken");
 
 
 const users =[
@@ -18,6 +19,11 @@ router.get('/:id', (req, res) => {
  });
 
 router.post('/', (req, res) => {
+    const users={id:3};
+    const token = jwt.sign({user},'my secret key');
+    res.json({
+        token:token
+    })
      const {error}=ValidateUser(req.body);
      if(error){
          res.status(400),send(result.error.details[0].message);
@@ -30,12 +36,7 @@ router.post('/', (req, res) => {
       };
       users.push(user);
      res.send(user);
-    
-     const token = user.generateAuthToken();
-  
-    res.header("Authorization", "Bearer " + token)
-    //.send(_.pick(user, ["_id", "name", "email"]));
-    .send({ token });
+     
       });
 
       router.put('/:id',(req,res)=>{
@@ -73,5 +74,18 @@ function ValidateUser(user){
     
      return  schema.validate(user);
 }
+
+function ensuretoken(req,res,next){
+    const bearerheader=req.headers["authorization"];
+    if(typeof bearerheader !=='undefined'){
+        const bearer=bearerheader.split(" ");
+        const bearerToken=bearer[1];
+        req.token=bearerToken;
+        next();}
+        else{
+       res.sendStatus(403);
+        }
+
+    }
 
 module.exports=router;

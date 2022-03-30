@@ -28,13 +28,8 @@ const userSchema=new mongoose.Schema({
        type:String
     }
 });
-userSchema.methods.generateAuthToken = function () {
-  const token = jwt.sign(
-    _.pick(this, [ "name"]),
-    config.get("jwtSecret")
-  );
-  return token;
-  }
+
+
 const User= mongoose.model('User',userSchema);
 async function createUser(){
 const  user = new User({
@@ -72,7 +67,7 @@ async function updateUser(id){
     user.isPublished=true;
     user.username='Another author';
     const result=await user.save()
-    console.log(result),
+    console.log(result)
     
 }
 updateUser('62397510035e27e7e348350c');
