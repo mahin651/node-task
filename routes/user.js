@@ -9,8 +9,11 @@ const users =[
     {id: 2,name:'raj'},
     {id: 3,name:'akhilesh'},
 ]
-router.get('/',(req,res)=>{
+router.get('/',ensuretoken,(req,res)=>{
     res.send(users);
+    res.json({
+        text:'this is protected'
+    })
 })
 router.get('/:id', (req, res) => {
     const user = users.find(c=>c.id === parseInt(req.params.id));
